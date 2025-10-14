@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Vân Anh &#38; Hồng Quân</title>
+  <title>Vân Anh &#38; Đặng Hoàn</title>
   <meta http-equiv="Cache-Control" content="no-cache" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta http-equiv="Expires" content="-1" />
   <meta name="keywords" content="" />
-  <meta name="description" content="Vân Anh &#38; Hồng Quân" />
+  <meta name="description" content="Vân Anh &#38; Đặng Hoàn" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script type="text/javascript">
     window.ladi_viewport = function (b) {
@@ -64,11 +64,11 @@
   </script>
   <link rel="canonical" href="https://camcui.vn/anhquan" />
   <meta property="og:url" content="https://camcui.vn/anhquan" />
-  <meta property="og:title" content="Vân Anh &#38; Hồng Quân" />
+  <meta property="og:title" content="Vân Anh &#38; Đặng Hoàn" />
   <meta property="og:type" content="website" />
   <meta property="og:image"
     content="https://static.ladipage.net/6322a62f2dad980013bb5005/mieg0732-20250508130744-snhot.jpg" />
-  <meta property="og:description" content="Vân Anh &#38; Hồng Quân" />
+  <meta property="og:description" content="Vân Anh &#38; Đặng Hoàn" />
   <meta name="format-detection" content="telephone=no" />
   <link rel="icon" type="image/x-icon"
     href="https://static.ladipage.net/6322a62f2dad980013bb5005/untitled-1-20250323102909-q2zbh.png" />
@@ -2733,7 +2733,7 @@
     #HEADLINE51,
     #HEADLINE113,
     #HEADLINE111 {
-      width: 170px;
+      width: 195px;
     }
 
     #HEADLINE51 {
@@ -2978,7 +2978,7 @@
     #LINE13 {
       height: 110px;
       top: 0px;
-      left: 176px;
+      left: 192px;
     }
 
     #LINE13>.ladi-line>.ladi-line-container {
@@ -3008,7 +3008,7 @@
     #HEADLINE110 {
       width: 106px;
       top: 0px;
-      left: 32px;
+      left: 44px;
     }
 
     #HEADLINE112>.ladi-headline,
@@ -3024,7 +3024,7 @@
     #HEADLINE113,
     #HEADLINE111 {
       top: 29.2px;
-      left: 0px;
+      left: -10px;
     }
 
     #HEADLINE113>.ladi-headline,
@@ -3452,7 +3452,7 @@
     #HEADLINE61>.ladi-headline,
     #HEADLINE73>.ladi-headline {
       font-family: MUZUViWSVAtTWuclldXItTGEtRGbGFpcUtUmVndWxhcivdGY;
-      font-size: 54px;
+      font-size: 44px;
       line-height: 1.6;
       color: rgb(255, 255, 255);
       text-align: center;
@@ -4873,16 +4873,49 @@
       phamngocsonmediasound__();
     }
     const phamngocsonmedia_List = [
-      "https://camcui.vn/bai57.mp3", // i do
-    ];
-    //Random music
-    let index = Math.floor(Math.random() * phamngocsonmedia_List.length);
-    const audio = new Audio(phamngocsonmedia_List[index]);
+        "./assests/music/nhac.mp3", // i do
+      ];
+      //Random music
+      let index = Math.floor(Math.random() * phamngocsonmedia_List.length);
+      const audio = new Audio(phamngocsonmedia_List[index]);
+      audio.preload = "auto";
+      audio.autoplay = true;
 
-    function phamngocsonmediasound__() {
-      audio.play();
-    }
+      // Ensure we start playback from 1:21 (81 seconds) once metadata is ready
+      audio.addEventListener("loadedmetadata", function () {
+        try {
+          audio.currentTime = 82;
+        } catch (e) {
+          // Some browsers require a user gesture before seeking; fallback click handler below will handle
+        }
+      });
+
+      // Try to autoplay on page load; fallback to click if blocked
+      (function tryAutoplay() {
+        const playPromise = audio.play();
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise.catch(function () {
+            // Autoplay blocked; waiting for first user interaction (handled below)
+          });
+        }
+      })();
+
+      function phamngocsonmediasound__() {
+        try {
+          if (audio.currentTime < 81.5) {
+            audio.currentTime = 82;
+          }
+        } catch (e) {}
+        audio.play();
+        document.removeEventListener("click", phamngocsonmediasound__);
+        document.removeEventListener("touchstart", phamngocsonmediasound__);
+        document.removeEventListener("wheel", phamngocsonmediasound__);
+        document.removeEventListener("scroll", phamngocsonmediasound__);
+      }
     document.addEventListener("click", phamngocsonmediasound__);
+    document.addEventListener("touchstart", phamngocsonmediasound__, { passive: true });
+    document.addEventListener("wheel", phamngocsonmediasound__, { passive: true });
+    document.addEventListener("scroll", phamngocsonmediasound__, { passive: true });
     audio.addEventListener("ended", function () {
       index = (index + 1) % phamngocsonmedia_List.length;
       audio.src = phamngocsonmedia_List[index];
@@ -5164,9 +5197,7 @@
                 </div>
                 <div id="HEADLINE113" class="ladi-element">
                   <p class="ladi-headline">
-                    Ông. Đặng Văn Hưởng<br />Bà. Nguyễn Thị Hoa<br />TP. Hà
-                    Nội
-                    <br />
+                    ĐẶNG VĂN HƯỞNG <br />NGUYỄN THỊ HOA<br />Chú rể: Đặng Văn Hoàn<br />
                   </p>
                 </div>
               </div>
@@ -5178,8 +5209,7 @@
                 </div>
                 <div id="HEADLINE111" class="ladi-element">
                   <p class="ladi-headline">
-                    Ông. Nguyễn Trí Đoàn<br />Bà. Hồ Thuý Liên<br />TP. Hà
-                    Nội<br />
+                    NGUYỄN TRÍ ĐOÀN <br />HỒ THÚY LIÊN<br />Cô dâu: Nguyễn Thị Vân Anh<br />
                   </p>
                 </div>
               </div>
@@ -5410,7 +5440,7 @@
           <div class="ladi-box ladi-transition"></div>
         </div>
         <div id="HEADLINE73" class="ladi-element">
-          <p class="ladi-headline">Our memories</p>
+          <p class="ladi-headline">Album of Love</p>
         </div>
         <div id="LINE5" class="ladi-element">
           <div class="ladi-line">
@@ -5419,11 +5449,12 @@
         </div>
         <div id="HEADLINE74" class="ladi-element">
           <p class="ladi-headline">
-            This album captures the most beautiful moments of our special
-            day—filled with love, joy, and unforgettable memories. From our
-            heartfelt vows to the first dance, every photo tells a story of
-            our journey together. Surrounded by family and friends, we
-            celebrated a love that will last a lifetime.
+            Album này ghi lại những khoảnh khắc đẹp nhất trong ngày trọng đại
+            của chúng tớ. Tràn ngập tình yêu, niềm vui và những kỷ niệm khó
+            quên. Từ lời thề nguyện thiêng liêng đến điệu nhảy đầu tiên, mỗi
+            bức ảnh đều kể một câu chuyện về hành trình bên nhau. Giữa vòng
+            tay gia đình và bạn bè, chúng tớ cùng nguyện cầu một tình yêu bền lâu.
+            <a href="https://www.facebook.com/profile.php?id=100072087055456" target="_blank">Xem album của chúng tớ</a>
           </p>
         </div>
         <div id="BOX17" class="ladi-element">

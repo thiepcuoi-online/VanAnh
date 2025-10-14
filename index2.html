@@ -4881,14 +4881,14 @@ function __phamngocsonmedia() {
       audio.preload = "auto";
       audio.autoplay = true;
 
-      // Ensure we start playback from 1:21 (81 seconds) once metadata is ready
-      audio.addEventListener("loadedmetadata", function () {
-        try {
-          audio.currentTime = 82;
-        } catch (e) {
-          // Some browsers require a user gesture before seeking; fallback click handler below will handle
-        }
-      });
+      // // Ensure we start playback from 1:21 (81 seconds) once metadata is ready
+      // audio.addEventListener("loadedmetadata", function () {
+      //   try {
+      //     audio.currentTime = 82;
+      //   } catch (e) {
+      //     // Some browsers require a user gesture before seeking; fallback click handler below will handle
+      //   }
+      // });
 
       // Try to autoplay on page load; fallback to click if blocked
       (function tryAutoplay() {
@@ -4901,11 +4901,11 @@ function __phamngocsonmedia() {
       })();
 
       function phamngocsonmediasound__() {
-        try {
-          if (audio.currentTime < 81.5) {
-            audio.currentTime = 82;
-          }
-        } catch (e) {}
+        // try {
+        //   if (audio.currentTime < 81.5) {
+        //     audio.currentTime = 82;
+        //   }
+        // } catch (e) {}
         audio.play();
         document.removeEventListener("click", phamngocsonmediasound__);
         document.removeEventListener("touchstart", phamngocsonmediasound__);
